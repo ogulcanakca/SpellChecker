@@ -80,28 +80,14 @@ list<string> fileReading(ifstream& file_reading_1, ifstream& file_reading_2)
 			}
 		}
 	}
-	for (string existing_word_item : existing_words)
-	{
-		for (string searching_words_item : searching_words)
-		{
-			
-			if (!existing_words.front().find(searching_words_item))
-			{
-				cout << existing_word_item << "is not found"<< endl;
-				existing_words.pop_front();
-			}
-			else
-			{
-				cout << existing_word_item << "is found"<<endl;
-			}
-		}
-	}
 	
-	return searching_words;
+	return existing_words, searching_words;
 }
 
 int main()
 {
+	list<string> searching_words;
+	list<string> existing_words;
 	list<string> words;
 	ifstream file_reading_1;
 	string filename_1 = "alice.txt";
@@ -109,6 +95,23 @@ int main()
 	ifstream file_reading_2;
 	string filename_2 = "cmudict.dict";
 	file_reading_2.open(filename_2);
-	words = fileReading(file_reading_1,file_reading_2);
+	existing_words, searching_words = fileReading(file_reading_1,file_reading_2);
+	for (string existing_word_item : existing_words)
+	{
+		for (string searching_words_item : searching_words)
+		{
+
+			if (!existing_words.front().find(searching_words_item))
+			{
+				cout << existing_word_item << "is not found" << endl;
+				existing_words.pop_front();
+			}
+			else
+			{
+				cout << existing_word_item << "is found" << endl;
+			}
+		}
+	}
+
 }
 
